@@ -1,6 +1,10 @@
 ﻿using System.ComponentModel.Design;
 using Core;
 
+///////////////////////////////////////////////////////////////////////////
+// EXAMPLE 1: Simple text file manipulation with loggin
+///////////////////////////////////////////////////////////////////////////
+
 //var texFile = new SimpleTextFile("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\data.txt");
 //using var logger = new LogWriter("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\log.txt");
 //try
@@ -71,7 +75,7 @@ using Core;
 //                Console.WriteLine("Lines sorted.");
 //                logger.WriteLog("INFO", "Sorted the lines in the list.");
 //                break;
-                
+
 //            case "0":
 //                Console.WriteLine("Exiting...");
 //                logger.WriteLog("INFO", "User chose to exit the application.");
@@ -81,7 +85,7 @@ using Core;
 //                Console.WriteLine("Invalid option. Please try again.");
 //                logger.WriteLog("WARNING", $"User entered an invalid option: {option}");
 //                break;
-                
+
 //        }
 //    } while (option != "0");
 //    texFile.WriteAllLines(list.ToArray());
@@ -118,22 +122,49 @@ using Core;
 //    Console.WriteLine(line);
 //}
 
+///////////////////////////////////////////////////////////////////////////
+// EXAMPLE 2: Manual CSV manipulation
+///////////////////////////////////////////////////////////////////////////
 
-var people = new List<string[]>
+
+//var people = new List<string[]>
+//{
+//    new[] { "ID", "Name", "Age"},
+//    new[] { "1", "Alice", "30"},
+//    new[] { "2", "Bob", "25"},
+//    new[] { "3", "Charlie", "35"},
+//    new[] { "4", "Diego", "34"},
+//};
+
+//var manualCsvHelper = new ManualCsvHelper();
+//manualCsvHelper.WriteCsv("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people.csv", people);
+
+//var loadedPeople = manualCsvHelper.ReadCsv("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people.csv");
+
+//foreach (var person in loadedPeople)
+//{
+//    Console.WriteLine(string.Join("|", person));
+//}
+
+
+///////////////////////////////////////////////////////////////////////////
+// EXAMPLE 3 : Using CsvHelper library for CSV manipulation
+///////////////////////////////////////////////////////////////////////////
+///
+
+var list = new List<Person>()
 {
-    new[] { "ID", "Name", "Age"},
-    new[] { "1", "Alice", "30"},
-    new[] { "2", "Bob", "25"},
-    new[] { "3", "Charlie", "35"},
-    new[] { "4", "Diego", "34"},
+    new() { Id = 1, Name = "Alice", Age = 30 },
+    new() { Id = 2, Name = "Bob", Age = 25 },
+    new() { Id = 3, Name = "Charlie", Age = 35 },
+    new() { Id = 4, Name = "Diego", Age = 34 },
+    new() { Id = 5, Name = "Eve", Age = 28 },
 };
 
-var manualCsvHelper = new ManualCsvHelper();
-manualCsvHelper.WriteCsv("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people.csv", people);
+var helper = new CsvHelperExample();
+helper.Write("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people_helper.csv", list);
 
-var loadedPeople = manualCsvHelper.ReadCsv("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people.csv");
-
-foreach (var person in loadedPeople)
+foreach (var person in helper.Read("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people_helper.csv"))
 {
-    Console.WriteLine(string.Join("|", person));
+    Console.WriteLine($"{person.Id} | {person.Name} | {person.Age} years old");
 }
