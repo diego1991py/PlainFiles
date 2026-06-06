@@ -152,19 +152,40 @@ using Core;
 ///////////////////////////////////////////////////////////////////////////
 ///
 
-var list = new List<Person>()
+//var list = new List<Person>()
+//{
+//    new() { Id = 1, Name = "Alice", Age = 30 },
+//    new() { Id = 2, Name = "Bob", Age = 25 },
+//    new() { Id = 3, Name = "Charlie", Age = 35 },
+//    new() { Id = 4, Name = "Diego", Age = 34 },
+//    new() { Id = 5, Name = "Eve", Age = 28 },
+//};
+
+//var helper = new CsvHelperExample();
+//helper.Write("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv", list);
+
+//foreach (var person in helper.Read("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv"))
+//{
+//    Console.WriteLine($"{person.Id} | {person.Name} | {person.Age} years old");
+//}
+
+
+var items = new List<FixedWidthRecord>()
 {
-    new() { Id = 1, Name = "Alice", Age = 30 },
-    new() { Id = 2, Name = "Bob", Age = 25 },
-    new() { Id = 3, Name = "Charlie", Age = 35 },
-    new() { Id = 4, Name = "Diego", Age = 34 },
-    new() { Id = 5, Name = "Eve", Age = 28 },
+    new FixedWidthRecord{ Code = "A001", Description = "Iphone 17 Pro Max ", Price = 6700000 },
+    new FixedWidthRecord{ Code = "B002", Description = "Iwatch Series 15", Price = 2300000 },
+    new FixedWidthRecord{ Code = "C003", Description = "Airpods Pro 3 ", Price = 1200000 },
+    new FixedWidthRecord{ Code = "D004", Description = "Macbook Pro 16", Price = 15000000 },
+    new FixedWidthRecord{ Code = "E005", Description = "iPad Pro 12.9 ", Price = 9000000 },
 };
 
-var helper = new CsvHelperExample();
-helper.Write("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv", list);
+var path = "C:\\Users\\Invitado 1\\Desktop\\tmp\\fixed_width.txt";
+var example = new FixedWidthExample();
+example.Write(path, items);
 
-foreach (var person in helper.Read("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv"))
+var loadedItems = example.Read(path);
+
+foreach (var item in loadedItems)
 {
-    Console.WriteLine($"{person.Id} | {person.Name} | {person.Age} years old");
+    Console.WriteLine($"{item.Code,-5} | {item.Description,-40} | {item.Price,12:C}");
 }
