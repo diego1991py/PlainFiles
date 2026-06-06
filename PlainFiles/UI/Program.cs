@@ -162,9 +162,9 @@ var list = new List<Person>()
 };
 
 var helper = new CsvHelperExample();
-helper.Write("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people_helper.csv", list);
+helper.Write("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv", list);
 
-foreach (var person in helper.Read("D:\\Documentos\\ITM\\Cuarto Semestre\\ESTRUCTURA DE DATOS Y LABORATORIO\\Unidad 4\\tmp\\people_helper.csv"))
+foreach (var person in helper.Read("C:\\Users\\Invitado 1\\Desktop\\tmp\\people_helper.csv"))
 {
     Console.WriteLine($"{person.Id} | {person.Name} | {person.Age} years old");
 }
